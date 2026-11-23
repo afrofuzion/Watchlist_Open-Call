@@ -644,7 +644,9 @@ window.WATCHLIST_CONFIG = {
         var lab = el('label', { class: 'opt' });
         // value ist immer die deutsche Fassung – das landet im Sheet
         lab.appendChild(el('input', { type: q.type, name: q.key, value: de(c) }));
-        if (c && c.sub) {
+        // typeof-Test ist Pflicht: bei einem String ist c.sub die alte
+        // Methode String.prototype.sub und damit truthy.
+        if (typeof c === 'object' && c.sub) {
           var d = el('span');
           d.appendChild(reg(el('b'), c));
           d.appendChild(reg(el('small'), c.sub));
